@@ -1,9 +1,9 @@
-public class Cliente {
-    private String nome;
-    private String rg;
-    private String endereco;
-    private String telefone;
-    private String cnh;
+public abstract class Cliente {
+    protected String nome;
+    protected String rg;
+    protected String endereco;
+    protected String telefone;
+    protected  String cnh;
 
     public String getNome(){
         return nome;
@@ -35,6 +35,9 @@ public class Cliente {
 
     public String getCnh(){
         return cnh;
+    }
+    public void setCnh(String cnh){
+        this.cnh = cnh;
     }
 
 }
