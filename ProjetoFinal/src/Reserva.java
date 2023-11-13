@@ -1,7 +1,6 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 public class Reserva {
     private Cliente cliente;
     private Data dataInicio;
@@ -11,7 +10,7 @@ public class Reserva {
     public Reserva() {
     }
 
-    public void fazerReserva(Cliente cliente,Data dataInicio, Data dataTermino, Carro carro) {
+    public void fazerReserva(Cliente cliente, Data dataInicio, Data dataTermino, Carro carro) {
         this.cliente = cliente;
         this.dataInicio = dataInicio;
         this.dataTermino = dataTermino;
@@ -45,3 +44,4 @@ public class Reserva {
             System.err.println("Erro ao salvar a reserva em arquivo.");
         }
     }
+}
