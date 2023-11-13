@@ -1,9 +1,8 @@
-public class Carro {
-    private String modelo;
-    private String placa;
-    private String marca;
-    private boolean disponibilidade;
-    private int quantidade;
+public abstract class Carro {
+    protected String modelo;
+    protected String placa;
+    protected String marca;
+    protected int quantidade;
 
     public int getQuantidade(){
         return quantidade;
@@ -36,5 +35,8 @@ public class Carro {
         this.marca = marca;
     }
 
-
+    public boolean verificarDisponibilidade() {
+        // Verifica se a quantidade disponível é maior que zero
+        return quantidade > 0;
+    }
 }
