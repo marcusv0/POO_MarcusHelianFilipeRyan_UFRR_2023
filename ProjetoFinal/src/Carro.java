@@ -1,14 +1,12 @@
-public abstract class Carro {
+public class Carro {
     protected String modelo;
     protected String placa;
     protected String marca;
-    protected int quantidade;
 
-    public int getQuantidade(){
-        return quantidade;
-    }
-    public void setQuantidade(int quantidade){
-        this.quantidade = quantidade;
+    public Carro(String modelo, String placa, String marca) {
+        this.modelo = modelo;
+        this.placa = placa;
+        this.marca = marca;
     }
 
     public String getModelo(){
@@ -35,8 +33,9 @@ public abstract class Carro {
         this.marca = marca;
     }
 
-    public boolean verificarDisponibilidade() {
-        // Verifica se a quantidade disponível é maior que zero
-        return quantidade > 0;
+    public void testeAtributos() {
+        System.out.println(this.marca);
+        System.out.println(this.modelo);
+        System.out.println(this.placa);
     }
 }
