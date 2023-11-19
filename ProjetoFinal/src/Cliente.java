@@ -1,4 +1,4 @@
-public abstract class Cliente {
+public class Cliente {
     protected String nome;
     protected String rg;
     protected String endereco;
