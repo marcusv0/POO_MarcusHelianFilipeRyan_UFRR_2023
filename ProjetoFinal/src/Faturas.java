@@ -4,25 +4,42 @@ import java.util.ArrayList;
 public class Faturas {
     private Reserva reserva;
     private double valorTotal;
-    private List<itemFatura> item;
+    private List<itemFatura> itens;
 
+    // Construtor omitido para brevidade
+
+    /**
+     * Obtém o valor total da fatura.
+     * @return O valor total da fatura.
+     */
     public double getValorTotal() {
         return valorTotal;
     }
 
+    /**
+     * Define o valor total da fatura.
+     * @param valorTotal O novo valor total da fatura.
+     */
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
 
+    /**
+     * Adiciona um item à fatura.
+     * @param itemFatura O item da fatura a ser adicionado.
+     */
     public void adicionarItemFatura(itemFatura itemFatura) {
-        if (item == null) {
-            item = new ArrayList<>();
+        if (itens == null) {
+            itens = new ArrayList<>();
         }
-        item.add(itemFatura);
+        itens.add(itemFatura);
     }
 
-    public List<itemFatura> getItem() {
-        return item;
+    /**
+     * Obtém a lista de itens da fatura.
+     * @return A lista de itens da fatura.
+     */
+    public List<itemFatura> getItens() {
+        return itens;
     }
-
 }
