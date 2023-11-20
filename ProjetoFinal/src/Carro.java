@@ -2,11 +2,17 @@
  * Classe que representa um carro na locadora.
  * Contém informações como modelo, placa e marca do carro.
  */
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Carro {
     // Atributos protegidos para armazenar informações do carro
     protected String modelo;
     protected String placa;
     protected String marca;
+    private static int quantidade=0;
 
     /**
      * Construtor que inicializa um objeto Carro com as informações fornecidas.
@@ -18,6 +24,7 @@ public class Carro {
         this.modelo = modelo;
         this.placa = placa;
         this.marca = marca;
+        quantidade++; // adiciona 1 à quantidade
     }
 
     /**
@@ -75,5 +82,34 @@ public class Carro {
         System.out.println("Marca: " + this.marca);
         System.out.println("Modelo: " + this.modelo);
         System.out.println("Placa: " + this.placa);
+    }
+
+    /**
+     * Método que salva os dados do carro em um arquivo txt
+     */
+    public void salvarCarro() {
+        String caminho = new String("dadosCarro" + File.separator + "carro" + Carro.getQuantidade()); 
+        try {
+            FileWriter arquivo = new FileWriter(caminho, true); // se não existe, cria
+            BufferedWriter escritor = new BufferedWriter(arquivo);
+
+            escritor.write(this.getModelo());
+            escritor.write("\n" + this.getMarca());
+            escritor.write("\n" + this.getPlaca());
+            
+
+            escritor.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Método que retorna a quantidade de carros criados(atributo da classe)
+     * @return A quantidade de carros
+     */
+    public static int getQuantidade() {
+        return quantidade;
     }
 }
