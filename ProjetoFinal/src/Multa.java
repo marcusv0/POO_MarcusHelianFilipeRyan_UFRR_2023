@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.*;
 
 public class Multa {
-    private static int contadorMulta = 1;
+    private static int contadorMulta = 1; // Contador para gerar IDs únicos para cada multa
     private int id;
     private int valor;
     private Cliente cliente;
@@ -12,28 +12,63 @@ public class Multa {
     private String cnh;
     private String descricao;
 
+    /**
+     * Obtém o valor da multa.
+     * @return O valor da multa.
+     */
     public int getValor() {
         return valor;
     }
 
+    /**
+     * Define o valor da multa.
+     * @param valor O novo valor da multa.
+     */
     public void setValor(int valor) {
         this.valor = valor;
     }
 
+    /**
+     * Obtém o número da CNH associado à multa.
+     * @return O número da CNH.
+     */
     public String getCnh() {
         return cnh;
     }
+
+    /**
+     * Define o número da CNH associado à multa.
+     * @param cnh O novo número da CNH.
+     */
     public void setCnh(String cnh) {
         this.cnh = cnh;
     }
 
-    public int getId(){
+    /**
+     * Obtém o ID único da multa.
+     * @return O ID da multa.
+     */
+    public int getId() {
         return id;
     }
-    public void setId(int id){
+
+    /**
+     * Define o ID da multa.
+     * @param id O novo ID da multa.
+     */
+    public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Registra uma nova multa com os dados fornecidos e salva no arquivo.
+     * @param id O ID único da multa.
+     * @param valor O valor da multa.
+     * @param cnh O número da CNH associado à multa.
+     * @param cliente O cliente associado à multa.
+     * @param carro O carro associado à multa.
+     * @param descricao A descrição da multa.
+     */
     public void registrarMulta(int id, int valor, String cnh, Cliente cliente, Carro carro, String descricao) {
         this.id = id;
         this.valor = valor;
@@ -44,11 +79,18 @@ public class Multa {
         salvarDadosEmArquivo();
     }
 
+    /**
+     * Cancela uma multa com base no ID fornecido e remove os dados do arquivo.
+     * @param id O ID da multa a ser cancelada.
+     */
     public void cancelarMulta(int id) {
         removerDadosDoArquivo(id);
         System.out.println("Multa cancelada com sucesso!");
     }
 
+    /**
+     * Salva os dados da multa em um arquivo.
+     */
     private void salvarDadosEmArquivo() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("dados_multas.txt", true))) {
             // Adiciona os dados ao arquivo
@@ -66,6 +108,10 @@ public class Multa {
         }
     }
 
+    /**
+     * Remove os dados da multa do arquivo com base no ID fornecido.
+     * @param id O ID da multa a ser removida.
+     */
     private void removerDadosDoArquivo(int id) {
         try {
             // Lê o conteúdo do arquivo
