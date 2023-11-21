@@ -8,7 +8,7 @@ public class Main {
         multa1.registrarMulta();
         Data data1 = new Data(1, 1, 2022);
         Data data2 = new Data(10, 11, 2023);
-        Reserva reserva1 = new Reserva(cliente1, data1, data2, carro1);
+        Reserva reserva1 = new Reserva(cliente1, data1, data2, carro1, 2500);
         reserva1.salvarReservaEmArquivo();
         
         Cliente cliente2 = new Cliente("Pedro", "8539", "Av. Ville Roy", "98-9948-7633", "712488", 30);
@@ -19,9 +19,10 @@ public class Main {
         multa2.registrarMulta();
         Data data3 = new Data(18, 11, 2022);
         Data data4 = new Data(10, 8, 2023);
-        Reserva reserva2 = new Reserva(cliente2, data3, data4, carro2);
+        Reserva reserva2 = new Reserva(cliente2, data3, data4, carro2, 1000);
         reserva2.salvarReservaEmArquivo();
 
+        multa1.excluirDadosDoArquivo();
 
     }
 }
