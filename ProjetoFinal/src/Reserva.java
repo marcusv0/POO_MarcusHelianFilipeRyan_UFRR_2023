@@ -53,4 +53,24 @@ public class Reserva {
             e.printStackTrace();
         }
     }
+
+    public void excluirDadosDoArquivo() {
+        String caminho = new String("dadosReserva" + File.separator + "reserva_" + cliente.getNome() + "_" + carro.getModelo());
+        try {
+            File arquivo = new File(caminho);
+
+            if (arquivo.exists()) {
+                if (arquivo.delete()) {
+                    System.out.println("Dados removidos do arquivo com sucesso!");
+                } else {
+                    System.err.println("Erro ao remover o arquivo.");
+                }
+            } else {
+                System.out.println("Arquivo não encontrado.");
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao excluir dados do arquivo: " + e.getMessage());
+        }
+    }
 }
+
