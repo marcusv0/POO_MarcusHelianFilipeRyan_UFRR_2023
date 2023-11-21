@@ -31,11 +31,6 @@ public class Multa {
         this.id = id;
     }
 
-    public void cancelarMulta(int id) {
-        removerDadosDoArquivo(id);
-        System.out.println("Multa cancelada com sucesso!");
-    }
-
     public void registrarMulta() {
         String caminho = new String("dadosMultas" + File.separator + "multa_" + this.id);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminho, true))) {
@@ -54,36 +49,22 @@ public class Multa {
         }
     }
 
-    private void removerDadosDoArquivo(int id) {
+    public void excluirDadosDoArquivo() {
+        String caminho = new String("dadosMultas" + File.separator + "multa_" + this.id);
         try {
-            // Lê o conteúdo do arquivo
-            BufferedReader reader = new BufferedReader(new FileReader("dados_multas.txt"));
-            StringBuffer stringBuffer = new StringBuffer();
-            String line;
+            File arquivo = new File(caminho);
 
-            while ((line = reader.readLine()) != null) {
-                // Verifica se a linha contém o ID da multa a ser removida
-                if (line.contains("ID: " + id)) {
-                    // Pula as linhas da multa a ser removida
-                    for (int i = 0; i < 6; i++) {
-                        reader.readLine();
-                    }
+            if (arquivo.exists()) {
+                if (arquivo.delete()) {
+                    System.out.println("Dados removidos do arquivo com sucesso!");
                 } else {
-                    // Adiciona a linha ao buffer
-                    stringBuffer.append(line).append("\n");
+                    System.err.println("Erro ao remover o arquivo.");
                 }
+            } else {
+                System.out.println("Arquivo não encontrado.");
             }
-
-            reader.close();
-
-            // Escreve o conteúdo modificado de volta no arquivo
-            BufferedWriter writer = new BufferedWriter(new FileWriter("dados_multas.txt"));
-            writer.write(stringBuffer.toString());
-            writer.close();
-
-            System.out.println("Dados removidos do arquivo com sucesso!");
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Erro ao excluir dados do arquivo: " + e.getMessage());
         }
     }
 }
