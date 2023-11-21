@@ -7,7 +7,6 @@ public class Reserva {
     private Data dataInicio;
     private Data dataTermino;
     private Carro carro;
-
     private Double valorReserva ;
 
 
