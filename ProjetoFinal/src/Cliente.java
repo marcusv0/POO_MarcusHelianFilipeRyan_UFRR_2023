@@ -83,6 +83,8 @@ public class Cliente {
             escritor.write("\n" + this.telefone);
             escritor.write("\n" + this.endereco);
             escritor.write("\n" + this.idade);
+
+
             escritor.close();
 
         } catch (IOException e) {
@@ -90,4 +92,24 @@ public class Cliente {
         }
     }
 
+    public void excluirDadosDoArquivo() {
+        String caminho = new String("dadosCliente" + File.separator + "cliente_" + this.nome);
+        try {
+            File arquivo = new File(caminho);
+
+            if (arquivo.exists()) {
+                if (arquivo.delete()) {
+                    System.out.println("Dados removidos do arquivo com sucesso!");
+                } else {
+                    System.err.println("Erro ao remover o arquivo.");
+                }
+            } else {
+                System.out.println("Arquivo não encontrado.");
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao excluir dados do arquivo: " + e.getMessage());
+        }
+    }
+
 }
+
