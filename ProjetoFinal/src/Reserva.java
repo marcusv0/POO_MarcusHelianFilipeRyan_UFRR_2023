@@ -6,8 +6,9 @@ public class Reserva {
     private Cliente cliente;
     private Data dataInicio;
     private Data dataTermino;
+    private Data dataDiferenca;
     private Carro carro;
-    private double valorReserva ;
+    private double valorTotal;
 
 
     public Reserva(Cliente cliente, Data dataInicio, Data dataTermino, Carro carro, double valorReserva) {
@@ -15,7 +16,7 @@ public class Reserva {
         this.dataInicio = dataInicio;
         this.dataTermino = dataTermino;
         this.carro = carro;
-        this.valorReserva = valorReserva;
+        this.valorTotal = valorReserva * dataDiferenca.diferencaEmDias(dataInicio, dataTermino);
         System.out.println("Reserva feita com sucesso.");
     }
 
@@ -25,13 +26,6 @@ public class Reserva {
         this.dataTermino = null;
         this.carro = null;
         System.out.println("Reserva cancelada com sucesso.");
-    }
-
-    public double getvalorReserva(){
-        return valorReserva;
-    }
-    public void setvalorReserva(Double valorReserva){
-        this.valorReserva = valorReserva;
     }
 
     public void salvarReservaEmArquivo() {
@@ -45,7 +39,7 @@ public class Reserva {
             writer.newLine();
             writer.write("Carro: " + carro.getModelo());
             writer.newLine();
-            writer.write("Valor da reserva: " + this.valorReserva);
+            writer.write("Valor total da reserva: " + this.valorTotal);
             writer.close();
 
             System.out.println("Reserva salva em arquivo com sucesso.");
@@ -73,4 +67,3 @@ public class Reserva {
         }
     }
 }
-
