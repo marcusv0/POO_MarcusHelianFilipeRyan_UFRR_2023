@@ -8,6 +8,9 @@ public class Reserva {
     private Data dataTermino;
     private Carro carro;
 
+    private Double valorReserva ;
+
+
     public Reserva(Cliente cliente, Data dataInicio, Data dataTermino, Carro carro) {
         this.cliente = cliente;
         this.dataInicio = dataInicio;
@@ -22,6 +25,13 @@ public class Reserva {
         this.dataTermino = null;
         this.carro = null;
         System.out.println("Reserva cancelada com sucesso.");
+    }
+
+    public Double getvalorReserva(){
+        return valorReserva;
+    }
+    public void setvalorReserva(Double valorReserva){
+        this.valorReserva = valorReserva;
     }
 
     public void salvarReservaEmArquivo() {
