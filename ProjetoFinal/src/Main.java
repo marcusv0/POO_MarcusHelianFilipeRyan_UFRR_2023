@@ -23,6 +23,8 @@ public class Main {
         reserva2.salvarReservaEmArquivo();
 
         multa1.excluirDadosDoArquivo();
-
+        carro2.excluirDadosDoArquivo();
+        cliente1.excluirDadosDoArquivo();
+        reserva2.excluirDadosDoArquivo();
     }
 }
