@@ -20,12 +20,8 @@ public class Reserva {
         System.out.println("Reserva feita com sucesso.");
     }
 
-    public void cancelarReserva() {
-        this.cliente = null;
-        this.dataInicio = null;
-        this.dataTermino = null;
-        this.carro = null;
-        System.out.println("Reserva cancelada com sucesso.");
+    public double getValorTotal(){
+        return valorTotal;
     }
 
     public void salvarReservaEmArquivo() {
