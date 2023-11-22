@@ -10,6 +10,8 @@ public class Main {
         Data data2 = new Data(10, 11, 2023);
         Reserva reserva1 = new Reserva(cliente1, data1, data2, carro1, 2500);
         reserva1.salvarReservaEmArquivo();
+        Faturas fatura1 = new Faturas(cliente1, reserva1, multa1, carro1);
+        fatura1.salvarFatura();
         
         Cliente cliente2 = new Cliente("Pedro", "8539", "Av. Ville Roy", "98-9948-7633", "712488", 30);
         cliente2.registrarCliente();
@@ -21,10 +23,13 @@ public class Main {
         Data data4 = new Data(10, 8, 2023);
         Reserva reserva2 = new Reserva(cliente2, data3, data4, carro2, 1000);
         reserva2.salvarReservaEmArquivo();
+        Faturas fatura2 = new Faturas(cliente2, reserva2, multa2, carro2);
+        fatura2.salvarFatura();
 
         multa1.excluirDadosDoArquivo();
         carro2.excluirDadosDoArquivo();
         cliente1.excluirDadosDoArquivo();
         reserva2.excluirDadosDoArquivo();
+        
     }
 }
