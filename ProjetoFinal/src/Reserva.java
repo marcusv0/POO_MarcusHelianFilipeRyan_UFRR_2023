@@ -6,7 +6,6 @@ public class Reserva {
     private Cliente cliente;
     private Data dataInicio;
     private Data dataTermino;
-    private Data dataDiferenca;
     private Carro carro;
     private double valorTotal;
 
@@ -16,8 +15,42 @@ public class Reserva {
         this.dataInicio = dataInicio;
         this.dataTermino = dataTermino;
         this.carro = carro;
-        this.valorTotal = valorReserva * dataDiferenca.diferencaEmDias(dataInicio, dataTermino);
+        this.valorTotal = valorReserva * diferencaEmDias(dataInicio, dataTermino);
         System.out.println("Reserva feita com sucesso.");
+    }
+
+    // Calcula a diferença de dias entre duas datas
+    public int diferencaEmDias(Data data1, Data data2) {
+
+        int diferencaDias;
+        int diferencaMeses;
+        int diferencaAnos;
+        int diferencaTotal;
+
+        if (data1.dia >= data2.dia){
+            diferencaDias = data1.dia - data2.dia;
+        }
+        else {
+            diferencaDias = data2.dia - data1.dia;
+        }
+
+        if (data1.mes >= data2.mes){
+            diferencaMeses = data1.mes - data2.mes;
+        }
+        else {
+            diferencaMeses = data2.mes - data1.mes;
+        }
+
+        if (data1.ano >= data2.ano){
+            diferencaAnos = data1.ano - data2.ano;
+        }
+        else {
+            diferencaAnos = data2.ano - data1.ano;
+        }
+
+        diferencaTotal = diferencaDias + (diferencaMeses * 30) + (diferencaAnos * 365);
+
+        return diferencaTotal;
     }
 
     public double getValorTotal(){
@@ -63,3 +96,4 @@ public class Reserva {
         }
     }
 }
+
