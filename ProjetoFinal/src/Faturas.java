@@ -22,13 +22,13 @@ public class Faturas {
             FileWriter arquivo = new FileWriter(caminho, true); // se não existe, cria
             BufferedWriter escritor = new BufferedWriter(arquivo);
 
-            escritor.write("CNH do cliente" + cliente.getCnh());
-            escritor.write("\nModelo do carro" + carro.getModelo());
-            escritor.write("\nMarca do carro" + carro.getMarca());
-            escritor.write("\nPlaca do carro" + carro.getPlaca());
-            escritor.write("\nDescrição da multa" + multa.getDescricao());
-            double valorFatura = reserva.getValorTotal() * multa.getValor();
-            escritor.write("\nValor da fatura" + valorFatura);
+            escritor.write("CNH do cliente: " + cliente.getCnh());
+            escritor.write("\nModelo do carro: " + carro.getModelo());
+            escritor.write("\nMarca do carro: " + carro.getMarca());
+            escritor.write("\nPlaca do carro: " + carro.getPlaca());
+            escritor.write("\nDescrição da multa: " + multa.getDescricao());
+            double valorFatura = reserva.getValorTotal() + multa.getValor();
+            escritor.write("\nValor da fatura: " + valorFatura);
 
 
             escritor.close();
@@ -39,7 +39,7 @@ public class Faturas {
     }
 
     public void excluirDadosDoArquivo() {
-        String caminho = new String("dadosFatura" + File.separator + "fatura" + cliente.getNome() + "_" + carro.getModelo());
+        String caminho = new String("dadosFatura" + File.separator + "fatura_" + cliente.getNome() + "_" + carro.getModelo());
         try {
             File arquivo = new File(caminho);
 
@@ -58,3 +58,4 @@ public class Faturas {
     }
 
 }
+
