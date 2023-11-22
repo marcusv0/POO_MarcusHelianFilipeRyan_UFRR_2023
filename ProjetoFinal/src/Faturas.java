@@ -1,45 +1,60 @@
-import java.util.List;
-import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Faturas {
     private Reserva reserva;
-    private double valorTotal;
-    private List<itemFatura> itens;
+    private Multa multa;
+    private Cliente cliente;
+    private Carro carro;
 
-    // Construtor omitido para brevidade
-
-    /**
-     * Obtém o valor total da fatura.
-     * @return O valor total da fatura.
-     */
-    public double getValorTotal() {
-        return valorTotal;
+    public Faturas(Cliente cliente, Reserva reserva, Multa multa, Carro carro){
+        this.cliente = cliente;
+        this.reserva = reserva;
+        this.multa = multa;
+        this.carro = carro;
     }
+    // Método para salvar a fatura
+    public void salvarFatura() {
+        String caminho = new String("dadosFatura" + File.separator + "fatura_" + cliente.getNome() + "_" + carro.getModelo());
+        try {
+            FileWriter arquivo = new FileWriter(caminho, true); // se não existe, cria
+            BufferedWriter escritor = new BufferedWriter(arquivo);
 
-    /**
-     * Define o valor total da fatura.
-     * @param valorTotal O novo valor total da fatura.
-     */
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
+            escritor.write("CNH do cliente" + cliente.getCnh());
+            escritor.write("\nModelo do carro" + carro.getModelo());
+            escritor.write("\nMarca do carro" + carro.getMarca());
+            escritor.write("\nPlaca do carro" + carro.getPlaca());
+            escritor.write("\nDescrição da multa" + multa.getDescricao());
+            double valorFatura = reserva.getValorTotal() * multa.getValor();
+            escritor.write("\nValor da fatura" + valorFatura);
 
-    /**
-     * Adiciona um item à fatura.
-     * @param itemFatura O item da fatura a ser adicionado.
-     */
-    public void adicionarItemFatura(itemFatura itemFatura) {
-        if (itens == null) {
-            itens = new ArrayList<>();
+
+            escritor.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        itens.add(itemFatura);
     }
 
-    /**
-     * Obtém a lista de itens da fatura.
-     * @return A lista de itens da fatura.
-     */
-    public List<itemFatura> getItens() {
-        return itens;
+    public void excluirDadosDoArquivo() {
+        String caminho = new String("dadosFatura" + File.separator + "fatura" + cliente.getNome() + "_" + carro.getModelo());
+        try {
+            File arquivo = new File(caminho);
+
+            if (arquivo.exists()) {
+                if (arquivo.delete()) {
+                    System.out.println("Dados removidos do arquivo com sucesso!");
+                } else {
+                    System.err.println("Erro ao remover o arquivo.");
+                }
+            } else {
+                System.out.println("Arquivo não encontrado.");
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao excluir dados do arquivo: " + e.getMessage());
+        }
     }
+
 }
