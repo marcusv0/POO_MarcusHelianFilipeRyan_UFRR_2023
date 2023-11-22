@@ -31,6 +31,14 @@ public class Multa {
         this.id = id;
     }
 
+    public String getDescricao(){
+        return descricao;
+    }
+
+    public void setDescricao(String descricao){
+        this.descricao = descricao;
+    }
+
     public void registrarMulta() {
         String caminho = new String("dadosMultas" + File.separator + "multa_" + this.id);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminho, true))) {
