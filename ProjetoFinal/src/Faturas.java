@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Faturas {
+public class Faturas implements ManipularDados{
     private Reserva reserva;
     private Multa multa;
     private Cliente cliente;
@@ -15,20 +15,26 @@ public class Faturas {
         this.multa = multa;
         this.carro = carro;
     }
-    // Método para salvar a fatura
-    public void salvarFatura() {
+    
+    public void registrarDados() {
         String caminho = new String("dadosFatura" + File.separator + "fatura_" + cliente.getNome() + "_" + carro.getModelo());
         try {
             FileWriter arquivo = new FileWriter(caminho, true); // se não existe, cria
             BufferedWriter escritor = new BufferedWriter(arquivo);
 
             escritor.write("CNH do cliente: " + cliente.getCnh());
-            escritor.write("\nModelo do carro: " + carro.getModelo());
-            escritor.write("\nMarca do carro: " + carro.getMarca());
-            escritor.write("\nPlaca do carro: " + carro.getPlaca());
-            escritor.write("\nDescrição da multa: " + multa.getDescricao());
+            escritor.newLine();
+            escritor.write("Modelo do carro: " + carro.getModelo());
+            escritor.newLine();
+            escritor.write("Marca do carro: " + carro.getMarca());
+            escritor.newLine();
+            escritor.write("Placa do carro: " + carro.getPlaca());
+            escritor.newLine();
+            escritor.write("Descrição da multa: " + multa.getDescricao());
+            escritor.newLine();
             double valorFatura = reserva.getValorTotal() + multa.getValor();
-            escritor.write("\nValor da fatura: " + valorFatura);
+            escritor.write("Valor da fatura: " + valorFatura);
+            escritor.newLine();
 
 
             escritor.close();
@@ -58,4 +64,3 @@ public class Faturas {
     }
 
 }
-
