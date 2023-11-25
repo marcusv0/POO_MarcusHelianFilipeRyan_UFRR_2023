@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Funcionario extends Pessoa {
+public class Funcionario extends Pessoa implements ManipularDados{
     private String cargo;
 
     public Funcionario(String nome, String rg, String endereco, String telefone, String cargo) {
@@ -11,25 +11,28 @@ public class Funcionario extends Pessoa {
         this.cargo = cargo;
     }
 
-    public String getCargo() {
+    public String getCargo(){
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(String cargo){
         this.cargo = cargo;
     }
 
-    public void registrarFuncionario() {
-        String caminho = new String("dadosFuncionario" + File.separator + "funcionario_" + this.getNome());
+    public void registrarDados() {
+        String caminho = new String("dadosFuncionario" + File.separator + "funcionario_" + getNome());
         try {
             FileWriter arquivo = new FileWriter(caminho, true); // se não existe, cria
             BufferedWriter escritor = new BufferedWriter(arquivo);
 
-            escritor.write(this.getNome());
-            escritor.write("\n" + this.getRg());
-            escritor.write("\n" + this.getEndereco());
-            escritor.write("\n" + this.getTelefone());
-            escritor.write("\n" + this.getCargo());
+            escritor.write("Nome do funcionário: " + getNome());
+            escritor.newLine();
+            escritor.write("RG: do funcionário: " + getRg());
+            escritor.newLine();
+            escritor.write("Endereço do funcionário: " + getEndereco());
+            escritor.newLine();
+            escritor.write("Telefone do funcionário: " + getTelefone());
+            escritor.write("Cargo do funcionário: " + getCargo());
 
 
             escritor.close();
@@ -40,7 +43,7 @@ public class Funcionario extends Pessoa {
     }
 
     public void excluirDadosDoArquivo() {
-        String caminho = new String("dadosFuncionario" + File.separator + "funcionario_" + this.getNome());
+        String caminho = new String("dadosFuncionario" + File.separator + "funcionario_" + getNome());
         try {
             File arquivo = new File(caminho);
 
@@ -57,4 +60,5 @@ public class Funcionario extends Pessoa {
             System.err.println("Erro ao excluir dados do arquivo: " + e.getMessage());
         }
     }
+
 }
