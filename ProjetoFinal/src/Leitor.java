@@ -15,8 +15,10 @@ public class Leitor {
 
             // Itera sobre os arquivos
             for (File arquivo : arquivos) {
-                System.out.println(caminho + File.separator + arquivo.getName());
+                System.out.println(arquivo.getName() + ":");
                 Leitor.lerArquivo(caminho + File.separator + arquivo.getName());
+                System.out.println();
+                
                 
             }
         } else {
