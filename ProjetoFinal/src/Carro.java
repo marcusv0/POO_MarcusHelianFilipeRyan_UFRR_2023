@@ -4,16 +4,22 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Carro {
-    protected String modelo;
-    protected String placa;
-    protected String marca;
+    private String modelo;
+    private String placa;
+    private String marca;
     private static int quantidade=0;
+    private int indetificador;
 
     public Carro(String modelo, String placa, String marca) {
         this.modelo = modelo;
         this.placa = placa;
         this.marca = marca;
         quantidade++;
+        this.indetificador = quantidade; // a quantidade até aquele momento, se tem 3 ele é o terceiro
+    }
+
+    public int getIdentificador() {
+        return this.indetificador;
     }
 
     public String getModelo() {
@@ -47,7 +53,7 @@ public class Carro {
     }
 
     public void salvarCarro() {
-        String caminho = new String("dadosCarro" + File.separator + "carro" + Carro.getQuantidade());
+        String caminho = new String("dadosCarro" + File.separator + "carro" + this.getIdentificador());
         try {
             FileWriter arquivo = new FileWriter(caminho, true); // se não existe, cria
             BufferedWriter escritor = new BufferedWriter(arquivo);
@@ -65,7 +71,7 @@ public class Carro {
     }
 
     public void excluirDadosDoArquivo() {
-        String caminho = new String("dadosCarro" + File.separator + "carro" + Carro.getQuantidade());
+        String caminho = new String("dadosCarro" + File.separator + "carro" + this.getIdentificador());
         try {
             File arquivo = new File(caminho);
 
