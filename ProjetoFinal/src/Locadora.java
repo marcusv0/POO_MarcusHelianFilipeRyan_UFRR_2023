@@ -1,88 +1,113 @@
-public class Locadora {
-    // Atributos privados para armazenar informações da locadora
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class Locadora implements ManipularDados {
     private String nome;
     private String cnpj;
     private String endereco;
     private String telefone;
-    private Funcionario funcionario;
+    private ArrayList<Funcionario> funcionarios;
+    private int quantidadeFuncionarios;
 
-    /**
-     * Obtém o nome da locadora.
-     * @return O nome da locadora.
-     */
-    public String getNome() {
-        return nome;
+    public Locadora(String nome, String cnpj, String endereco, String telefone) {
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.funcionarios = new ArrayList<>();
+        this.quantidadeFuncionarios = 0;
     }
 
-    /**
-     * Define o nome da locadora.
-     * @param nome O novo nome da locadora.
-     */
-    public void setNome(String nome) {
+    public String getNome(){
+        return nome;
+    }
+    public void setNome(String nome){
         this.nome = nome;
     }
 
-    /**
-     * Obtém o CNPJ da locadora.
-     * @return O CNPJ da locadora.
-     */
-    public String getCnpj() {
+    public String getCnpj(){
         return cnpj;
     }
-
-    /**
-     * Define o CNPJ da locadora.
-     * @param cnpj O novo CNPJ da locadora.
-     */
-    public void setCnpj(String cnpj) {
+    public void setCnpj(String cnpj){
         this.cnpj = cnpj;
     }
 
-    /**
-     * Obtém o endereço da locadora.
-     * @return O endereço da locadora.
-     */
-    public String getEndereco() {
+    public String getEndereco(){
         return endereco;
     }
-
-    /**
-     * Define o endereço da locadora.
-     * @param endereco O novo endereço da locadora.
-     */
-    public void setEndereco(String endereco) {
+    public void setEndereco(String endereco){
         this.endereco = endereco;
     }
 
-    /**
-     * Obtém o telefone da locadora.
-     * @return O telefone da locadora.
-     */
-    public String getTelefone() {
+    public String getTelefone(){
         return telefone;
     }
-
-    /**
-     * Define o telefone da locadora.
-     * @param telefone O novo telefone da locadora.
-     */
-    public void setTelefone(String telefone) {
+    public void setTelefone(String telefone){
         this.telefone = telefone;
     }
 
-    /**
-     * Obtém o funcionário associado à locadora.
-     * @return O funcionário associado à locadora.
-     */
-    public Funcionario getFuncionario() {
-        return funcionario;
+    public void contratarFuncionario(Funcionario novoFuncionario) {
+        funcionarios.add(novoFuncionario);
+        quantidadeFuncionarios++;
+        System.out.println("Funcionário contratado com sucesso!");
+        novoFuncionario.registrarDados();
     }
 
-    /**
-     * Define o funcionário associado à locadora.
-     * @param funcionario O novo funcionário associado à locadora.
-     */
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void demitirFuncionario(Funcionario funcionarioParaDemitir) {
+        if (funcionarios.remove(funcionarioParaDemitir)) {
+            quantidadeFuncionarios--;
+            System.out.println("Funcionário demitido com sucesso!");
+            funcionarioParaDemitir.excluirDadosDoArquivo();
+        } else {
+            System.out.println("Funcionário não encontrado na lista.");
+        }
+    }
+
+    public int getQuantidadeFuncionarios() {
+        return quantidadeFuncionarios;
+    }
+
+    @Override
+    public void registrarDados() {
+        String caminho = new String("dadosLocadora" + File.separator + "locadora_" + getNome());
+        try (BufferedWriter escritor = new BufferedWriter(new FileWriter(caminho, true))) {
+            escritor.write("Nome da locadora: " + getNome());
+            escritor.newLine();
+            escritor.write("CNPJ da locadora: " + getCnpj());
+            escritor.newLine();
+            escritor.write("Endereço da locadora: " + getEndereco());
+            escritor.newLine();
+            escritor.write("Telefone da locadora: " + getTelefone());
+            escritor.newLine();
+            escritor.write("Quantidade de funcionários: " + getQuantidadeFuncionarios());
+            escritor.newLine();
+
+            escritor.close();
+            System.out.println("Dados registrados com sucesso!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void excluirDadosDoArquivo() {
+        String caminho = new String("dadosLocadora" + File.separator + "locadora_" + getNome());
+        try {
+            File arquivo = new File(caminho);
+
+            if (arquivo.exists()) {
+                if (arquivo.delete()) {
+                    System.out.println("Dados removidos do arquivo com sucesso!");
+                } else {
+                    System.err.println("Erro ao remover o arquivo.");
+                }
+            } else {
+                System.out.println("Arquivo não encontrado.");
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao excluir dados do arquivo: " + e.getMessage());
+        }
     }
 }
