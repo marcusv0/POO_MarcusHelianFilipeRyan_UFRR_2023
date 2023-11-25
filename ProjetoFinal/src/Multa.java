@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class Multa {
+public class Multa implements ManipularDados{
     private static int contadorMulta = 0;
     private int id;
     private int valor;
@@ -39,16 +39,20 @@ public class Multa {
         this.descricao = descricao;
     }
 
-    public void registrarMulta() {
+    public void registrarDados() {
         String caminho = new String("dadosMultas" + File.separator + "multa_" + this.id);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminho, true))) {
             // Adiciona os dados ao arquivo
-            writer.write("Cliente: " + cliente.getNome() + "\n");
-            writer.write("Carro: " + carro.getModelo() + "\n");
-            writer.write("CNH: " + cliente.getCnh() + "\n");
-            writer.write("Descrição da Multa: " + this.descricao + "\n");
-            writer.write("Valor da Multa: " + this.valor + "\n");
-            writer.write("\n");  // Adiciona uma linha em branco para separar as multas
+            writer.write("Cliente: " + cliente.getNome());
+            writer.newLine();
+            writer.write("Carro: " + carro.getModelo());
+            writer.newLine();
+            writer.write("CNH: " + cliente.getCnh());
+            writer.newLine();
+            writer.write("Descrição da Multa: " + getDescricao());
+            writer.newLine();
+            writer.write("Valor da Multa: " + getValor());
+            writer.newLine();
             writer.close();
 
             System.out.println("Dados salvos no arquivo com sucesso!");
