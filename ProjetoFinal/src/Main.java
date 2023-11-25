@@ -3,34 +3,34 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args){
         Cliente cliente1 = new Cliente("André", "25539", "Av. Venezuela", "95-99948-7633", "962488", 23);
-        cliente1.registrarCliente();
+        cliente1.registrarDados();
         Carro carro1 = new Carro("ModeloXYZ", "ABC123", "MarcaXYZ");
-        carro1.salvarCarro();
+        carro1.registrarDados();
         Multa multa1 = new Multa(150, cliente1, carro1, "Excesso de velocidade");
-        multa1.registrarMulta();
+        multa1.registrarDados();
         LocalDate data1 = LocalDate.of(2022, 1, 1);
         LocalDate data2 = LocalDate.of(2022, 1, 8);
         Reserva reserva1 = new Reserva(cliente1, data1, data2, carro1, 200);
-        reserva1.salvarReservaEmArquivo();
+        reserva1.registrarDados();
         Faturas fatura1 = new Faturas(cliente1, reserva1, multa1, carro1);
-        fatura1.salvarFatura();
+        fatura1.registrarDados();
         Funcionario funcionario1 = new Funcionario("Emerson Royal", "45812-9", "Av. Brasil", "(95) 99178-6549", "Atendente");
-        funcionario1.registrarFuncionario();
+        funcionario1.registrarDados();
         
         Cliente cliente2 = new Cliente("Pedro", "8539", "Av. Ville Roy", "98-9948-7633", "712488", 30);
-        cliente2.registrarCliente();
+        cliente2.registrarDados();
         Carro carro2 = new Carro("ModelYZX", "DEF456", "MarcaYZX");
-        carro2.salvarCarro();
+        carro2.registrarDados();
         Multa multa2 = new Multa(350, cliente2, carro2, "Atravessar sinal vermelho");
-        multa2.registrarMulta();
+        multa2.registrarDados();
         LocalDate data3 = LocalDate.of(2022, 11, 10);
         LocalDate data4 = LocalDate.of(2022, 11, 17);
         Reserva reserva2 = new Reserva(cliente2, data3, data4, carro2, 300);
-        reserva2.salvarReservaEmArquivo();
+        reserva2.registrarDados();
         Faturas fatura2 = new Faturas(cliente2, reserva2, multa2, carro2);
-        fatura2.salvarFatura();
+        fatura2.registrarDados();
         Funcionario funcionario2 = new Funcionario("Arana", "97812-9", "Av. Venezuela", "(95) 99191-5678", "Atendente");
-        funcionario2.registrarFuncionario();
+        funcionario2.registrarDados();
 
         Leitor.lerPasta("dadosCarro");
         Leitor.lerPasta("dadosCliente");
@@ -53,4 +53,5 @@ public class Main {
         funcionario2.excluirDadosDoArquivo();
         
     }
+}
 }
