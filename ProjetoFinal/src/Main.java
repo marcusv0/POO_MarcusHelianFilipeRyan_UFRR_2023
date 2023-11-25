@@ -33,10 +33,21 @@ public class Main {
         funcionario2.registrarFuncionario();
 
         multa1.excluirDadosDoArquivo();
+        multa2.excluirDadosDoArquivo();
+
+        carro1.excluirDadosDoArquivo();
         carro2.excluirDadosDoArquivo();
+
         cliente1.excluirDadosDoArquivo();
+        cliente2.excluirDadosDoArquivo();
+
+        reserva1.excluirDadosDoArquivo();
         reserva2.excluirDadosDoArquivo();
+
         fatura1.excluirDadosDoArquivo();
+        fatura2.excluirDadosDoArquivo();
+        
+        funcionario1.excluirDadosDoArquivo();
         funcionario2.excluirDadosDoArquivo();
         
     }
