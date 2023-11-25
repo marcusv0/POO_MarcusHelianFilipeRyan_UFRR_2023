@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Cliente extends Pessoa {
+public class Cliente extends Pessoa implements ManipularDados{
     private String cnh;
     private int idade;
 
@@ -13,53 +13,58 @@ public class Cliente extends Pessoa {
         this.idade = idade;
     }
 
-    public String getCnh() {
+    public String getCnh(){
         return cnh;
     }
-
-    public void setCnh(String cnh) {
+    public void setCnh(String cnh){
         this.cnh = cnh;
     }
 
-    public int getIdade() {
+    public int getIdade(){
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(int idade){
         this.idade = idade;
     }
 
+
     public boolean estaAptoParaAlugarCarro() {
-        return idade >= 18;
+        if (this.getIdade() < 18) {
+            return false;
+        }
+        return true;
     }
 
-    public void registrarCliente() {
+    public void registrarDados() {
+        String caminho = new String("dadosCliente" + File.separator + "cliente_" + getNome());
         try {
-            String caminho = "dadosCliente" + File.separator + "cliente_" + this.getNome();
-            FileWriter arquivo = new FileWriter(caminho, true);
+            FileWriter arquivo = new FileWriter(caminho, true); // se não existe, cria
             BufferedWriter escritor = new BufferedWriter(arquivo);
 
-            escritor.write(this.getNome());
+            escritor.write("Nome do cliente: " + getNome());
             escritor.newLine();
-            escritor.write(this.getRg());
+            escritor.write("RG do cliente:" + getRg());
             escritor.newLine();
-            escritor.write(this.getEndereco());
+            escritor.write("CNH do cliente: " + getCnh());
             escritor.newLine();
-            escritor.write(this.getTelefone());
+            escritor.write("Telefone do cliente: " + getTelefone());
             escritor.newLine();
-            escritor.write(this.getCnh());
+            escritor.write("Endereço do cliente: " + getEndereco());
             escritor.newLine();
-            escritor.write(Integer.toString(this.getIdade()));
+            escritor.write("Idade do cliente: " + getIdade());
             escritor.newLine();
 
+
             escritor.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void excluirDadosDoArquivo() {
-        String caminho = new String("dadosCliente" + File.separator + "cliente_" + this.getNome());
+        String caminho = new String("dadosCliente" + File.separator + "cliente_" + getNome());
         try {
             File arquivo = new File(caminho);
 
@@ -75,6 +80,6 @@ public class Cliente extends Pessoa {
         } catch (Exception e) {
             System.err.println("Erro ao excluir dados do arquivo: " + e.getMessage());
         }
-        
     }
+
 }
