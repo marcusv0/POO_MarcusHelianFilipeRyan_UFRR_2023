@@ -6,7 +6,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Reserva {
+public class Reserva implements ManipularDados{
     private Cliente cliente;
     private LocalDate dataInicio;
     private LocalDate dataTermino;
@@ -31,7 +31,7 @@ public class Reserva {
         return valorTotal;
     }
 
-    public void salvarReservaEmArquivo() {
+    public void registrarDados() {
         String caminho = "dadosReserva" + File.separator + "reserva_" + cliente.getNome() + "_" + carro.getModelo();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminho, true))) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
