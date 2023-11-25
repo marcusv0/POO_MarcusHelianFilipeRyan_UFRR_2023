@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
-public class Instanciador {
+public class Leitor {
     public static void lerArquivo(String caminho) {
         // Usando try-with-resources para garantir o fechamento adequado do BufferedReader
         try (BufferedReader leitortxt = new BufferedReader(new FileReader(caminho))) {
