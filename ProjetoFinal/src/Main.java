@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Main {
     public static void main(String[] args){
         Cliente cliente1 = new Cliente("André", "25539", "Av. Venezuela", "95-99948-7633", "962488", 23);
@@ -6,8 +8,8 @@ public class Main {
         carro1.salvarCarro();
         Multa multa1 = new Multa(150, cliente1, carro1, "Excesso de velocidade");
         multa1.registrarMulta();
-        Data data1 = new Data(1, 1, 2022);
-        Data data2 = new Data(8, 1, 2022);
+        LocalDate data1 = LocalDate.of(2022, 1, 1);
+        LocalDate data2 = LocalDate.of(2022, 1, 8);
         Reserva reserva1 = new Reserva(cliente1, data1, data2, carro1, 200);
         reserva1.salvarReservaEmArquivo();
         Faturas fatura1 = new Faturas(cliente1, reserva1, multa1, carro1);
@@ -21,8 +23,8 @@ public class Main {
         carro2.salvarCarro();
         Multa multa2 = new Multa(350, cliente2, carro2, "Atravessar sinal vermelho");
         multa2.registrarMulta();
-        Data data3 = new Data(10, 11, 2022);
-        Data data4 = new Data(17, 11, 2022);
+        LocalDate data3 = LocalDate.of(2022, 11, 10);
+        LocalDate data4 = LocalDate.of(2022, 11, 17);
         Reserva reserva2 = new Reserva(cliente2, data3, data4, carro2, 300);
         reserva2.salvarReservaEmArquivo();
         Faturas fatura2 = new Faturas(cliente2, reserva2, multa2, carro2);
@@ -31,21 +33,10 @@ public class Main {
         funcionario2.registrarFuncionario();
 
         multa1.excluirDadosDoArquivo();
-        multa2.excluirDadosDoArquivo();
-
-        carro1.excluirDadosDoArquivo();
         carro2.excluirDadosDoArquivo();
-
         cliente1.excluirDadosDoArquivo();
-        cliente2.excluirDadosDoArquivo();
-
-        reserva1.excluirDadosDoArquivo();
         reserva2.excluirDadosDoArquivo();
-
         fatura1.excluirDadosDoArquivo();
-        fatura2.excluirDadosDoArquivo();
-
-        funcionario1.excluirDadosDoArquivo();
         funcionario2.excluirDadosDoArquivo();
         
     }
