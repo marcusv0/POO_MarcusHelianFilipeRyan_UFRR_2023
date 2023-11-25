@@ -3,97 +3,63 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Cliente {
-    private String nome;
-    private String rg;
-    private String endereco;
-    private String telefone;
+public class Cliente extends Pessoa {
     private String cnh;
     private int idade;
 
     public Cliente(String nome, String rg, String endereco, String telefone, String cnh, int idade) {
-        this.nome = nome;
-        this.rg = rg;
-        this.endereco = endereco;
-        this.telefone = telefone;
+        super(nome, rg, endereco, telefone);
         this.cnh = cnh;
         this.idade = idade;
     }
-    
-    public String getNome(){
-        return nome;
-    }
-    public void setNome(String nome){
-        this.nome = nome;
-    }
 
-    public String getRg(){
-        return rg;
-    }
-    public void setRg(String rg){
-        this.rg = rg;
-    }
-
-    public String getEndereco(){
-        return endereco;
-    }
-    public void setEndereco(String endereco){
-        this.endereco = endereco;
-    }
-
-    public String getTelefone(){
-        return telefone;
-    }
-    public void setTelefone(String telefone){
-        this.telefone = telefone;
-    }
-
-    public String getCnh(){
+    public String getCnh() {
         return cnh;
     }
-    public void setCnh(String cnh){
+
+    public void setCnh(String cnh) {
         this.cnh = cnh;
     }
 
-    public int getIdade(){
+    public int getIdade() {
         return idade;
     }
 
-    public void setIdade(int idade){
+    public void setIdade(int idade) {
         this.idade = idade;
     }
 
-
     public boolean estaAptoParaAlugarCarro() {
-        if (this.getIdade() < 18) {
-            return false;
-        }
-        return true;
+        return idade >= 18;
     }
 
     public void registrarCliente() {
-        String caminho = new String("dadosCliente" + File.separator + "cliente_" + this.nome);
         try {
-            FileWriter arquivo = new FileWriter(caminho, true); // se não existe, cria
+            String caminho = "dadosCliente" + File.separator + "cliente_" + this.getNome();
+            FileWriter arquivo = new FileWriter(caminho, true);
             BufferedWriter escritor = new BufferedWriter(arquivo);
 
-            escritor.write(this.nome);
-            escritor.write("\n" + this.rg);
-            escritor.write("\n" + this.cnh);
-            escritor.write("\n" + this.telefone);
-            escritor.write("\n" + this.endereco);
-            escritor.write("\n" + this.idade);
-
+            escritor.write(this.getNome());
+            escritor.newLine();
+            escritor.write(this.getRg());
+            escritor.newLine();
+            escritor.write(this.getEndereco());
+            escritor.newLine();
+            escritor.write(this.getTelefone());
+            escritor.newLine();
+            escritor.write(this.getCnh());
+            escritor.newLine();
+            escritor.write(Integer.toString(this.getIdade()));
+            escritor.newLine();
 
             escritor.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void excluirDadosDoArquivo() {
-        String caminho = new String("dadosCliente" + File.separator + "cliente_" + this.nome);
+        String caminho = new String("dadosCliente" + File.separator + "cliente_" + this.getNome());
         try {
             File arquivo = new File(caminho);
 
@@ -109,7 +75,6 @@ public class Cliente {
         } catch (Exception e) {
             System.err.println("Erro ao excluir dados do arquivo: " + e.getMessage());
         }
+        
     }
-
 }
-
