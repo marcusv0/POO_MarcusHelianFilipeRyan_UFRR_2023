@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Carro {
+public class Carro implements ManipularDados{
     private String modelo;
     private String placa;
     private String marca;
@@ -52,15 +52,18 @@ public class Carro {
         System.out.println("Placa: " + this.placa);
     }
 
-    public void salvarCarro() {
+    public void registrarDados() {
         String caminho = new String("dadosCarro" + File.separator + "carro" + this.getIdentificador());
         try {
             FileWriter arquivo = new FileWriter(caminho, true); // se não existe, cria
             BufferedWriter escritor = new BufferedWriter(arquivo);
 
-            escritor.write(this.getModelo());
-            escritor.write("\n" + this.getMarca());
-            escritor.write("\n" + this.getPlaca());
+            escritor.write("Modelo do carro: " + getModelo());
+            escritor.newLine();
+            escritor.write("Marca do carro: " + getMarca());
+            escritor.newLine();
+            escritor.write("Placa do carro: " + getPlaca());
+            escritor.newLine();
 
 
             escritor.close();
