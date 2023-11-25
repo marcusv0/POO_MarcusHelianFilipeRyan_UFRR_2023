@@ -15,11 +15,9 @@ public class Leitor {
 
             // Itera sobre os arquivos
             for (File arquivo : arquivos) {
-                // Verifica se o arquivo é um arquivo de texto (.txt)
-                if (arquivo.isFile() && arquivo.getName().endsWith(".txt")) {
-                    // Chama o método para ler o conteúdo do arquivo
-                    Leitor.lerArquivo(caminho + arquivo);
-                }
+                System.out.println(caminho + File.separator + arquivo.getName());
+                Leitor.lerArquivo(caminho + File.separator + arquivo.getName());
+                
             }
         } else {
             System.out.println("O diretório especificado não existe ou não é uma pasta.");
