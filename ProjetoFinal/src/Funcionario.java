@@ -3,68 +3,33 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Funcionario {
-    private String nome;
-    private String rg;
-    private String endereco;
-    private String telefone;
+public class Funcionario extends Pessoa {
     private String cargo;
 
     public Funcionario(String nome, String rg, String endereco, String telefone, String cargo) {
-        this.nome = nome;
-        this.rg = rg;
-        this.endereco = endereco;
-        this.telefone = telefone;
+        super(nome, rg, endereco, telefone);
         this.cargo = cargo;
     }
 
-    public String getNome(){
-        return nome;
-    }
-    public void setNome(String nome){
-        this.nome = nome;
-    }
-
-    public String getRg(){
-        return rg;
-    }
-    public void setRg(String rg){
-        this.rg = rg;
-    }
-
-    public String getEndereco(){
-        return endereco;
-    }
-    public void setEndereco(String endereco){
-        this.endereco = endereco;
-    }
-
-    public String getTelefone(){
-        return telefone;
-    }
-    public void setTelefone(String telefone){
-        this.telefone = telefone;
-    }
-
-    public String getCargo(){
+    public String getCargo() {
         return cargo;
     }
 
-    public void setCargo(String cargo){
+    public void setCargo(String cargo) {
         this.cargo = cargo;
     }
 
     public void registrarFuncionario() {
-        String caminho = new String("dadosFuncionario" + File.separator + "funcionario_" + this.nome);
+        String caminho = new String("dadosFuncionario" + File.separator + "funcionario_" + this.getNome());
         try {
             FileWriter arquivo = new FileWriter(caminho, true); // se não existe, cria
             BufferedWriter escritor = new BufferedWriter(arquivo);
 
-            escritor.write(this.nome);
-            escritor.write("\n" + this.rg);
-            escritor.write("\n" + this.endereco);
-            escritor.write("\n" + this.telefone);
-            escritor.write("\n" + this.cargo);
+            escritor.write(this.getNome());
+            escritor.write("\n" + this.getRg());
+            escritor.write("\n" + this.getEndereco());
+            escritor.write("\n" + this.getTelefone());
+            escritor.write("\n" + this.getCargo());
 
 
             escritor.close();
@@ -75,7 +40,7 @@ public class Funcionario {
     }
 
     public void excluirDadosDoArquivo() {
-        String caminho = new String("dadosFuncionario" + File.separator + "funcionario_" + this.nome);
+        String caminho = new String("dadosFuncionario" + File.separator + "funcionario_" + this.getNome());
         try {
             File arquivo = new File(caminho);
 
@@ -92,5 +57,4 @@ public class Funcionario {
             System.err.println("Erro ao excluir dados do arquivo: " + e.getMessage());
         }
     }
-
 }
