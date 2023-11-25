@@ -32,21 +32,23 @@ public class Main {
         Funcionario funcionario2 = new Funcionario("Arana", "97812-9", "Av. Venezuela", "(95) 99191-5678", "Atendente");
         funcionario2.registrarFuncionario();
 
+        Leitor.lerPasta("dadosCarro");
+        Leitor.lerPasta("dadosCliente");
+        Leitor.lerPasta("dadosFatura");
+        Leitor.lerPasta("dadosFuncionario");
+        Leitor.lerPasta("dadosMultas");
+        Leitor.lerPasta("dadosReserva");
+
         multa1.excluirDadosDoArquivo();
         multa2.excluirDadosDoArquivo();
-
         carro1.excluirDadosDoArquivo();
         carro2.excluirDadosDoArquivo();
-
         cliente1.excluirDadosDoArquivo();
         cliente2.excluirDadosDoArquivo();
-
         reserva1.excluirDadosDoArquivo();
         reserva2.excluirDadosDoArquivo();
-
         fatura1.excluirDadosDoArquivo();
         fatura2.excluirDadosDoArquivo();
-        
         funcionario1.excluirDadosDoArquivo();
         funcionario2.excluirDadosDoArquivo();
         
