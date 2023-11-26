@@ -32,7 +32,9 @@ public class Funcionario extends Pessoa implements ManipularDados{
             escritor.write("Endereço do funcionário: " + getEndereco());
             escritor.newLine();
             escritor.write("Telefone do funcionário: " + getTelefone());
+            escritor.newLine();
             escritor.write("Cargo do funcionário: " + getCargo());
+            escritor.newLine();
 
 
             escritor.close();
