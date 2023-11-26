@@ -1,13 +1,20 @@
+import java.io.File;
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args){
-        Locadora locadora = new Locadora("Locadora A", "123456789", "Rua Principal", "987654321");
-        
-        Funcionario funcionario1 = new Funcionario("Emerson", "45812-9", "Av. Brasil", "(95) 99178-6549", "Atendente");
-        locadora.contratarFuncionario(funcionario1);
-        
-        Cliente cliente1 = new Cliente("André", "25539", "Av. Venezuela", "95-99948-7633", "962488", 23);
+        // Criando uma locadora
+        Locadora minhaLocadora = new Locadora("Minha Locadora", "123456789", "Rua da Locadora", "123456789");
+        minhaLocadora.registrarDados();
+        // Contratando funcionários
+        Funcionario funcionario1 = new Funcionario("Funcionario1", "123", "Endereco1", "987654321", "Atendente");
+        Funcionario funcionario2 = new Funcionario("Funcionario2", "456", "Endereco2", "987654322", "Gerente");
+
+        minhaLocadora.contratarFuncionario(funcionario1);
+        minhaLocadora.contratarFuncionario(funcionario2);
+
+        // Registrando um cliente
+        Cliente cliente1 = new Cliente("Cliente1", "789", "EnderecoCliente1", "987654323", "CNHCliente1", 25);
         try {
             if (cliente1.estaAptoParaAlugarCarro()) {
                 cliente1.registrarDados();
@@ -15,71 +22,71 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-       
-        Carro carro1 = new Carro("ModeloXYZ", "ABC123", "MarcaXYZ");
+
+        // Registrando um carro
+        Carro carro1 = new Carro("ModeloCarro1", "ABC123", "MarcaCarro1");
         carro1.registrarDados();
-       
-        Multa multa1 = new Multa(150, cliente1, carro1, "Excesso de velocidade");
-        multa1.registrarDados();
-        
-        LocalDate data1 = LocalDate.of(2022, 1, 1);
-        LocalDate data2 = LocalDate.of(2022, 1, 8);
-        
-        Reserva reserva1 = new Reserva(cliente1, data1, data2, carro1, 200);
-        reserva1.registrarDados();
 
-        Faturas fatura1 = new Faturas(cliente1, reserva1, multa1, carro1);
-        fatura1.registrarDados();
-       
-        
+        // Criando uma reserva
+        LocalDate dataInicio = LocalDate.of(2022, 1, 1);
+        LocalDate dataTermino = LocalDate.of(2022, 1, 8);
+        Reserva reserva = new Reserva(cliente1, dataInicio, dataTermino, carro1, 100.0);
 
-        Funcionario funcionario2 = new Funcionario("Maria", "222", "Avenida dos Trabalhadores", "123-456-789", "Gerente");
-        locadora.contratarFuncionario(funcionario2);
-        
-        Cliente cliente2 = new Cliente("Pedro", "8539", "Av. Ville Roy", "98-9948-7633", "712488", 17);
-        try {
-            if (cliente2.estaAptoParaAlugarCarro()) {
-                cliente2.registrarDados();
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        
-        Carro carro2 = new Carro("ModelYZX", "DEF456", "MarcaYZX");
-        carro2.registrarDados();
-       
-        Multa multa2 = new Multa(350, cliente2, carro2, "Atravessar sinal vermelho");
-        multa2.registrarDados();
-       
-        LocalDate data3 = LocalDate.of(2022, 11, 10);
-        LocalDate data4 = LocalDate.of(2022, 11, 17);
-       
-        Reserva reserva2 = new Reserva(cliente2, data3, data4, carro2, 300);
-        reserva2.registrarDados();
-       
-        Faturas fatura2 = new Faturas(cliente2, reserva2, multa2, carro2);
-        fatura2.registrarDados();
-        
-        locadora.registrarDados();
+        // Registrando a reserva
+        reserva.registrarDados();
 
-        Leitor.lerPasta("dadosCliente");
+        // Criando uma multa
+        Multa multa = new Multa(50, cliente1, carro1, "Excesso de velocidade");
+
+        // Registrando a multa
+        multa.registrarDados();
+
+        // Criando uma fatura
+        Faturas fatura = new Faturas(cliente1, reserva, multa, carro1);
+
+        // Registrando a fatura
+        fatura.registrarDados();
+
+        // Lendo os dados registrados
+        System.out.println("Dados registrados da locadora:");
+        Leitor.lerArquivo("dadosLocadora" + File.separator + "locadora_" + minhaLocadora.getNome());
+
+        System.out.println("Dados registrados dos funcionários:");
         Leitor.lerPasta("dadosFuncionario");
-        Leitor.lerPasta("dadosLocadora");
 
-        multa1.excluirDadosDoArquivo();
-        multa2.excluirDadosDoArquivo();
-        carro1.excluirDadosDoArquivo();
-        carro2.excluirDadosDoArquivo();
+        System.out.println("\nDados registrados do cliente:");
+        Leitor.lerArquivo("dadosCliente" + File.separator + "cliente_" + cliente1.getNome());
+
+        System.out.println("\nDados registrados do carro:");
+        Leitor.lerArquivo("dadosCarro" + File.separator + "carro" + carro1.getIdentificador());
+
+        System.out.println("\nDados registrados da reserva:");
+        Leitor.lerArquivo("dadosReserva" + File.separator + "reserva_" + cliente1.getNome() + "_" + carro1.getModelo());
+
+        System.out.println("\nDados registrados da multa:");
+        Leitor.lerArquivo("dadosMultas" + File.separator + "multa_" + multa.getId());
+
+        System.out.println("\nDados registrados da fatura:");
+        Leitor.lerArquivo("dadosFatura" + File.separator + "fatura_" + cliente1.getNome() + "_" + carro1.getModelo());
+
+        // Excluindo dados
         cliente1.excluirDadosDoArquivo();
-        cliente2.excluirDadosDoArquivo();
-        reserva1.excluirDadosDoArquivo();
-        reserva2.excluirDadosDoArquivo();
-        fatura1.excluirDadosDoArquivo();
-        fatura2.excluirDadosDoArquivo();
-        
-        locadora.demitirFuncionario(funcionario1);
-        locadora.demitirFuncionario(funcionario2);
-        locadora.excluirDadosDoArquivo();
-        
+        carro1.excluirDadosDoArquivo();
+        reserva.excluirDadosDoArquivo();
+        multa.excluirDadosDoArquivo();
+        fatura.excluirDadosDoArquivo();
+        minhaLocadora.demitirFuncionario(funcionario1);
+        minhaLocadora.demitirFuncionario(funcionario2);
+        minhaLocadora.excluirDadosDoArquivo();
+
+        // Verificando se os dados foram removidos
+        System.out.println("\nVerificando se os dados foram removidos:");
+        Leitor.lerPasta("dadosLocadora");
+        Leitor.lerPasta("dadosFuncionario");
+        Leitor.lerPasta("dadosCliente");
+        Leitor.lerPasta("dadosCarro");
+        Leitor.lerPasta("dadosReserva");
+        Leitor.lerPasta("dadosMultas");
+        Leitor.lerPasta("dadosFatura");
     }
 }
