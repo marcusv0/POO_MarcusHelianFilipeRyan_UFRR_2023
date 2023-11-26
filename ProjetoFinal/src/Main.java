@@ -2,6 +2,9 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args){
+        Locadora locadora = new Locadora("Locadora A", "123456789", "Rua Principal", "987654321");
+        Funcionario funcionario1 = new Funcionario("Emerson", "45812-9", "Av. Brasil", "(95) 99178-6549", "Atendente");
+        locadora.contratarFuncionario(funcionario1);
         Cliente cliente1 = new Cliente("André", "25539", "Av. Venezuela", "95-99948-7633", "962488", 23);
         cliente1.registrarDados();
         Carro carro1 = new Carro("ModeloXYZ", "ABC123", "MarcaXYZ");
@@ -14,9 +17,9 @@ public class Main {
         reserva1.registrarDados();
         Faturas fatura1 = new Faturas(cliente1, reserva1, multa1, carro1);
         fatura1.registrarDados();
-        Funcionario funcionario1 = new Funcionario("Emerson Royal", "45812-9", "Av. Brasil", "(95) 99178-6549", "Atendente");
-        funcionario1.registrarDados();
         
+        Funcionario funcionario2 = new Funcionario("Maria", "222", "Avenida dos Trabalhadores", "123-456-789", "Gerente");
+        locadora.contratarFuncionario(funcionario2);
         Cliente cliente2 = new Cliente("Pedro", "8539", "Av. Ville Roy", "98-9948-7633", "712488", 30);
         cliente2.registrarDados();
         Carro carro2 = new Carro("ModelYZX", "DEF456", "MarcaYZX");
@@ -29,15 +32,11 @@ public class Main {
         reserva2.registrarDados();
         Faturas fatura2 = new Faturas(cliente2, reserva2, multa2, carro2);
         fatura2.registrarDados();
-        Funcionario funcionario2 = new Funcionario("Arana", "97812-9", "Av. Venezuela", "(95) 99191-5678", "Atendente");
-        funcionario2.registrarDados();
+        locadora.registrarDados();
 
-        Leitor.lerPasta("dadosCarro");
-        Leitor.lerPasta("dadosCliente");
-        Leitor.lerPasta("dadosFatura");
+        
         Leitor.lerPasta("dadosFuncionario");
-        Leitor.lerPasta("dadosMultas");
-        Leitor.lerPasta("dadosReserva");
+        Leitor.lerPasta("dadosLocadora");
 
         multa1.excluirDadosDoArquivo();
         multa2.excluirDadosDoArquivo();
@@ -49,9 +48,10 @@ public class Main {
         reserva2.excluirDadosDoArquivo();
         fatura1.excluirDadosDoArquivo();
         fatura2.excluirDadosDoArquivo();
-        funcionario1.excluirDadosDoArquivo();
-        funcionario2.excluirDadosDoArquivo();
+        
+        locadora.demitirFuncionario(funcionario1);
+        locadora.demitirFuncionario(funcionario2);
+        locadora.excluirDadosDoArquivo();
         
     }
-}
 }
